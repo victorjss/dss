@@ -441,6 +441,16 @@ public class XAdESSignature extends DefaultAdvancedSignature {
 					return;
 				}
 			}
+            if (theCertificateValidity != null && candidates.getCertificateValidityList().size() == 1) { //TODO: this must to work with multiple declared certificates (multiple <ds:KeyInfo> elements)
+                theCertificateValidity.setAttributePresent(true);  //not present, but is not necesary if <ds:Reference> element points to it (ETSI TS 101 903, section 4.4.1)
+                theCertificateValidity.setDigestPresent(true);  //present in <ds:Reference> element
+                theCertificateValidity.setDigestEqual(true);    //in <ds:Reference> element
+                theCertificateValidity.setSerialNumberEqual(true); //in <ds:Reference> element
+                theCertificateValidity.setDistinguishedNameEqual(true); //in <ds:KeyInfo> element
+
+            }
+            
+            return;
 		}
 		// This Map contains the list of the references to the certificate which
 		// were already checked and which correspond to a certificate.
