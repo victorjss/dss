@@ -437,7 +437,7 @@ public class XAdESSignature extends DefaultAdvancedSignature {
 				}
 				if ((certificateToken != null) && id.equals(certificateToken.getXmlId())) {
 
-					theCertificateValidity.setSigned(element.getNodeName());
+					theCertificateValidity.setSigned(element.getLocalName());
 					return;
 				}
 			}
@@ -572,14 +572,14 @@ public class XAdESSignature extends DefaultAdvancedSignature {
 			return false;
 		}
 		Node node = element;
-		String nodeName = node.getNodeName();
+		String nodeName = node.getLocalName();
 		if (XPathQueryHolder.XMLE_X509CERTIFICATE.equals(nodeName)) {
 
 			node = node.getParentNode();
 			if (node == null) {
 				return false;
 			}
-			nodeName = node.getNodeName();
+			nodeName = node.getLocalName();
 
 		}
 		if (XPathQueryHolder.XMLE_X509DATA.equals(nodeName)) {
@@ -588,7 +588,7 @@ public class XAdESSignature extends DefaultAdvancedSignature {
 			if (node == null) {
 				return false;
 			}
-			nodeName = node.getNodeName();
+			nodeName = node.getLocalName();
 		}
 		if (XPathQueryHolder.XMLE_KEYINFO.equals(nodeName)) {
 
